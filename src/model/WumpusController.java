@@ -1,6 +1,4 @@
-package program;
-
-import model.Maze;
+package model;
 
 public class WumpusController {
 	
