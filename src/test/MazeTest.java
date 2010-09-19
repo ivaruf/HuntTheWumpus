@@ -1,13 +1,8 @@
 package test;
-
 import static org.junit.Assert.*;
-
-
 import model.Maze;
 import model.Room;
-
 import org.junit.Test;
-
 
 public class MazeTest {
 	

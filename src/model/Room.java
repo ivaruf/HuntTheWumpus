@@ -5,7 +5,24 @@ public class Room {
 	boolean isEntrance;
 	boolean isPath;
 	boolean isWall;
+	boolean isInitialPath;
 	
+	public Room() {
+		isEntrance = false;
+		isPath = false;
+		isWall = false;
+		isInitialPath = false;
+		
+	}
+	
+	public boolean isInitialPath() {
+		return isInitialPath;
+	}
+
+	public void setInitialPath(boolean isInitialPath) {
+		this.isInitialPath = isInitialPath;
+	}
+
 	public boolean isWall() {
 		return isWall;
 	}
@@ -14,12 +31,6 @@ public class Room {
 		this.isWall = isWall;
 	}
 
-	public Room() {
-		isEntrance = false;
-		isPath = false;
-		isWall = false;
-		
-	}
 
 	public boolean isEntrance() {
 		return isEntrance;
