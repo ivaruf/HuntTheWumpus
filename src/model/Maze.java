@@ -1,10 +1,8 @@
 package model;
 
-import java.util.Random;
-
 public class Maze {
 	
-	Room[][] rooms;
+	private Room[][] rooms;
 	
 	public Maze(int dimension) {
 		rooms = new Room[dimension][dimension];
@@ -74,12 +72,6 @@ public class Maze {
 			}
 			System.out.print('\n');
 		}
-	}
-	
-	
-	public int chooseRandomDirection() {
-		Random random = new Random();
-		return random.nextInt(4)+1;
 	}
 }
 		

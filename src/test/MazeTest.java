@@ -64,16 +64,4 @@ public class MazeTest {
 			}
 		}
 	}
-	
-	@Test
-	public void chooseRandomDirectionTest() throws Exception {
-		Maze maze = new Maze(5);
-		int direction = maze.chooseRandomDirection();
-		boolean success = false;
-		if(direction == 1 || direction == 2 || direction == 3 || direction == 4) {
-			success = true;
-		}
-		assertTrue(success);
-		
-	}
 }
