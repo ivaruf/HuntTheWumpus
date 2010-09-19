@@ -30,17 +30,17 @@ public class Maze {
 	}
 
 	private void initRooms() {
-		for (int i = 0; i < rooms.length; i++) {
-			for (int j = 0; j < rooms[i].length; j++) {
-				rooms[i][j] = new Room();
+		for (int row = 0; row < rooms.length; row++) {
+			for (int column = 0; column < rooms[row].length; column++) {
+				rooms[row][column] = new Room();
 			}
 		}
 	}
 
 	public int getNumberOfRooms() {
 		int numberOfRooms = 0;
-		for (int i = 0; i < rooms.length; i++) {
-			for (int j = 0; j < rooms[i].length; j++) {
+		for (int row = 0; row < rooms.length; row++) {
+			for (int column = 0; column < rooms[row].length; column++) {
 				numberOfRooms++;
 			}
 		}

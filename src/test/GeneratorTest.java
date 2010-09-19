@@ -16,6 +16,5 @@ public class GeneratorTest {
 			success = true;
 		}
 		assertTrue(success);
-		
 	}
 }
