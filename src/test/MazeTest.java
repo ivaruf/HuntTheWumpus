@@ -62,9 +62,9 @@ public class MazeTest {
 			}
 		}
 		maze = new Maze(7);
-		for(int row = 0; row < 6; row++) {
-			for(int column = 0; column < 6; column++) {
-				if(row == 0 || row == 6 || column == 0 || column == 6) {
+		for(int row = 0; row < 7; row++) {
+			for(int column = 0; column < 7; column++) {
+				if(row == 0 || row == 7 || column == 0 || column == 7) {
 					assertTrue(maze.getRoom(row,column).isWall());
 				}
 			}
