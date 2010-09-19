@@ -42,11 +42,23 @@ public class MazeTest {
 	@Test
 	public void outerWallsAreWalls() throws Exception {
 		Maze maze = new Maze(5);
-		for(int row = 0; row < 4; row++) {
-			for(int column = 0; column < 4; column++) {
-				if(row == 0 || row == 4 || column == 0 || column == 4) {
+		for(int row = 0; row < 5; row++) {
+			for(int column = 0; column < 5; column++) {
+				if(row == 0) {
 					assertTrue(maze.getRoom(row,column).isWall());
 				}
+				if(row == 4){
+					assertTrue(maze.getRoom(row,column).isWall());
+				}
+				
+				if(column == 0){
+					assertTrue(maze.getRoom(row,column).isWall());
+				}
+				
+				if(column == 4){
+					assertTrue(maze.getRoom(row,column).isWall());
+				}
+				
 			}
 		}
 		maze = new Maze(7);

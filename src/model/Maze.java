@@ -13,8 +13,8 @@ public class Maze {
 	}
 
 	private void setOuterWalls(int dimension) {
-		for(int row = 0; row < dimension-1; row++) {
-			for(int column = 0; column < dimension -1; column++) {
+		for(int row = 0; row < dimension; row++) {
+			for(int column = 0; column < dimension; column++) {
 				if(row == 0 || row == dimension-1 || column == 0 || column == dimension-1) {
 					rooms[row][column].setWall(true);
 				}
@@ -50,4 +50,28 @@ public class Maze {
 	public Room getRoom(int row, int column) {
 		return rooms[row][column];
 	}
+
+	public void printMaze() {
+		int dimension = rooms.length;
+		
+		for(int row = 0; row < dimension; row++) {
+			for(int column = 0; column < dimension; column++) {
+				
+				if(rooms[row][column].isEntrance) {
+					System.out.print("  ");
+				}
+				else if(rooms[row][column].isWall()) {
+					System.out.print("# ");
+				}
+				else if(rooms[row][column].isPath()) {
+					System.out.print("  ");
+				}
+				else {
+					System.out.print("x ");
+				}
+			}
+			System.out.print('\n');
+		}
+	}
 }
+		
