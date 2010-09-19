@@ -44,28 +44,22 @@ public class MazeTest {
 		Maze maze = new Maze(5);
 		for(int row = 0; row < 5; row++) {
 			for(int column = 0; column < 5; column++) {
-				if(row == 0) {
+				if(row == 0 || row == 4 || column == 0 || column == 4) {
 					assertTrue(maze.getRoom(row,column).isWall());
 				}
-				if(row == 4){
-					assertTrue(maze.getRoom(row,column).isWall());
+				else {
+					assertFalse(maze.getRoom(row, column).isWall());
 				}
-				
-				if(column == 0){
-					assertTrue(maze.getRoom(row,column).isWall());
-				}
-				
-				if(column == 4){
-					assertTrue(maze.getRoom(row,column).isWall());
-				}
-				
 			}
 		}
 		maze = new Maze(7);
 		for(int row = 0; row < 7; row++) {
 			for(int column = 0; column < 7; column++) {
-				if(row == 0 || row == 7 || column == 0 || column == 7) {
+				if(row == 0 || row == 6 || column == 0 || column == 6) {
 					assertTrue(maze.getRoom(row,column).isWall());
+				}
+				else {
+					assertFalse(maze.getRoom(row, column).isWall());
 				}
 			}
 		}
