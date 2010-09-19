@@ -12,7 +12,7 @@
     SN: Shoot Arrow North
     SS: Shoot Arrow South
 
-    * You can’t always move in all directions. If you try the game will say: “You can’t go {east|west|north|south} from here”
+    * You can't always move in all directions. If you try the game will say: "You can't go {east|west|north|south} from here"
     * If you move into a cavern with the wumpus, or if the wumpus moves into your cavern while you are resting, you die, and the game is over.
     * If you shoot in a direction, the arrow will continue to go in that direction until it hits a wall, or the wumpus.
           o If the arrow passes through the cavern that contains the wumpus, it dies, and you win.
@@ -20,13 +20,13 @@
           o If you move into a cavern that has an arrow, you automatically pick it up.
           o If you shoot in a direction that does not exist, the arrow bounces back and kills you.
     * Some caverns have pits.
-          o If you are near a cavern that has a pit, you will “hear wind”.
+          o If you are near a cavern that has a pit, you will "hear wind".
           o If you move into a cavern with a pit, you fall in and die.
     * Some caverns have bats.
-          o If you are near a cavern that has bats you will “hear chirping”.
+          o If you are near a cavern that has bats you will "hear chirping".
           o If you move into a cavern with bats, the bats pick you up and drop you at a random location in the maze.
                 + The bats then return to the original cavern.
     * The wumpus moves randomly every turn.
           o It moves through the maze, it does not teleport.
           o It sometimes rests.
-          o If you are near the wumpus you will “smell the wumpus”.
+          o If you are near the wumpus you will "smell the wumpus".
