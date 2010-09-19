@@ -37,4 +37,24 @@ public class MazeTest {
 		Room northOfEntrance = maze.getRoom(3, 2);
 		assertTrue(northOfEntrance.isPath());
 	}
+	
+	@Test
+	public void outerWallsAreWalls() throws Exception {
+		Maze maze = new Maze(5);
+		for(int row = 0; row < 4; row++) {
+			for(int column = 0; column < 4; column++) {
+				if(row == 0 || row == 4 || column == 0 || column == 4) {
+					assertTrue(maze.getRoom(row,column).isWall());
+				}
+			}
+		}
+		maze = new Maze(7);
+		for(int row = 0; row < 6; row++) {
+			for(int column = 0; column < 6; column++) {
+				if(row == 0 || row == 6 || column == 0 || column == 6) {
+					assertTrue(maze.getRoom(row,column).isWall());
+				}
+			}
+		}
+	}
 }
