@@ -3,10 +3,11 @@ package test;
 import static org.junit.Assert.*;
 
 
+import model.Maze;
+import model.Room;
+
 import org.junit.Test;
 
-import program.Maze;
-import program.Room;
 
 public class MazeTest {
 	

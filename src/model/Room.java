@@ -1,4 +1,4 @@
-package program;
+package model;
 
 public class Room {
 	
