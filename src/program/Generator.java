@@ -11,7 +11,7 @@ public class Generator {
 
 	static public int randomCooridnate(int dimention) {
 		Random random = new Random();
-		return random.nextInt(dimention)+1;
+		return random.nextInt(dimention-2)+1;
 	}
 
 }

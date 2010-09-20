@@ -7,13 +7,18 @@ public class Maze {
 	private Room[][] rooms;
 	private int dimention;
 	
-	public Maze(int dimension) {
-		rooms = new Room[dimension][dimension];
-		this.dimention = dimension;
+	public Maze(int dimention) {
+		rooms = new Room[dimention][dimention];
+		this.dimention = dimention;
 		initRooms();		
 		setEntrance();
 		setOuterWalls();
-		generatePath((dimension*3)/2, true, 1);		
+		//generate initial path from entrance...
+		generatePath(dimention*2, true, 1, dimention-2, (dimention-1)/2);
+		for(int i = 0; i < dimention; i++) {
+			generatePath(dimention/4, false, Generator.chooseRandomDirection(),
+						Generator.randomCooridnate(dimention), Generator.randomCooridnate(dimention));
+		}
 	}
 
 	private void setOuterWalls() {
@@ -41,120 +46,58 @@ public class Maze {
 		}
 	}
 	
-	private void generatePath(int steps, boolean initial, int directionTendency) {
-		//start at room north of entrance
-		int currentRow = dimention-2;
-		int currentColumn = (dimention-1)/2;
+	private void generatePath(int steps, boolean initial, int directionTendency, int startRow, int startColumn) {
+		int currentRow = startRow;
+		int currentColumn = startColumn;
 		
-		int nextRow = currentRow;
-		int nextColumn = currentColumn;
-		
+		boolean hitInitialPath = false;
+		boolean tendency = true;
+		int direction;
 		
 		for(int i = 0; i < steps; i++) {
-			int direction = Generator.chooseRandomDirection();
+			if(tendency){
+				direction = directionTendency;
+				tendency = false;
+			}
+			else {
+				tendency = true;				
+				direction = Generator.chooseRandomDirection();
+			}
 			// go north, -1 row
 			if(direction == 1){
-				nextRow = currentRow -1;
-				nextColumn = currentColumn;
+				currentRow = currentRow -1;
 			}
 			//go east, +1 column
 			else if(direction == 2){
-				nextRow = currentRow;
-				nextColumn = currentColumn +1;
-				
+				currentColumn = currentColumn +1;
 			}
 			//go south, row +1;
 			else if(direction == 3){
-				nextRow = currentRow+1;
-				nextColumn = currentColumn;
+				currentRow = currentRow+1;
 			}
 			//go west, -1 column
 			else if(direction == 4){
-				nextRow = currentRow;
-				nextColumn = currentColumn-1;
+				currentColumn = currentColumn-1;
 			}
 			
-			if(nextColumn <= dimention || nextRow <= dimention) {
-				Room roomToheck = getRoom(nextRow, nextColumn);
+			if(currentColumn < dimention && currentRow < dimention && currentRow > 0 && currentColumn > 0) {
+				Room roomToheck = getRoom(currentRow, currentColumn);
+				if(!initial && roomToheck.isInitialPath()) {
+					hitInitialPath = true;
+				}
 				if(!roomToheck.isEntrance() && !roomToheck.isWall()) {
 					roomToheck.setPath(true);
-					roomToheck.setInitialPath(true);
-					currentRow = nextRow;
-					currentColumn = nextColumn;
+					if(initial){
+						roomToheck.setInitialPath(true);
+					}
 				}
 			}
-			//tendency to go north
-			if(currentRow > 1 && direction != 1 && directionTendency == 1) {
-				currentRow--;
-				Room northPath = getRoom(currentRow, nextColumn);
-				northPath.setPath(true);
-				northPath.setInitialPath(true);
-			}
-			//tendency to go east
-			if(currentColumn < dimention-2 && direction != 2 && directionTendency == 2) {
-				currentColumn++;
-				Room northPath = getRoom(currentRow, nextColumn);
-				northPath.setPath(true);
-				northPath.setInitialPath(true);
-			}
-			//tendency to go north
-			if(currentRow > 1 && direction != 3 && directionTendency == 3) {
-				currentRow--;
-				Room northPath = getRoom(currentRow, nextColumn);
-				northPath.setPath(true);
-				northPath.setInitialPath(true);
-			}
-			//tendency to go north
-			if(currentRow > 1 && direction != 4 && directionTendency == 4) {
-				currentRow--;
-				Room northPath = getRoom(currentRow, nextColumn);
-				northPath.setPath(true);
-				northPath.setInitialPath(true);
-			}
-			
 		}
-	}
-
-	private void generateRandomPath() {
-		int currentRow = Generator.randomCooridnate(dimention);
-		int currentColumn = Generator.randomCooridnate(dimention);
-		
-		int nextRow = currentRow;
-		int nextColumn = currentColumn;
-		for(int i = 0; i < 10000; i++) {
-			int direction = Generator.chooseRandomDirection();
-			// go north, -1 row
-			if(direction == 1){
-				nextRow = currentRow -1;
-				nextColumn = currentColumn;
-			}
-			//go east, +1 column
-			else if(direction == 2){
-				nextRow = currentRow;
-				nextColumn = currentColumn +1;
-				
-			}
-			//go south, row +1;
-			else if(direction == 3){
-				nextRow = currentRow+1;
-				nextColumn = currentColumn;
-			}
-			//go west, -1 column
-			else if(direction == 4){
-				nextRow = currentRow;
-				nextColumn = currentColumn-1;
-			}
-			
-			if(nextColumn < dimention && nextRow < dimention && nextRow >= 0 && nextColumn >= 0) {
-				Room roomToheck = getRoom(nextRow, nextColumn);
-				if(roomToheck.isInitialPath())
-					break;
-				if(!roomToheck.isEntrance() && !roomToheck.isWall()) {
-					roomToheck.setPath(true);
-					currentRow = nextRow;
-					currentColumn = nextColumn;
-				}
-			}
+		if(!hitInitialPath) {
+//			boolean eastBreakout = false;
+//			
+//			while()
+//			breakOutEastAndWest(currentRow, currentColumn);
 		}
 	}
 
