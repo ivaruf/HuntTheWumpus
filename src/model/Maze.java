@@ -52,9 +52,9 @@ public class Maze {
 			
 			if(nextColumn < dimention && nextRow < dimention && nextRow >= 0 && nextColumn >= 0) {
 				Room roomToheck = getRoom(nextRow, nextColumn);
-				if(roomToheck.isInitialPath)
+				if(roomToheck.isInitialPath())
 					break;
-				if(!roomToheck.isEntrance && !roomToheck.isWall) {
+				if(!roomToheck.isEntrance() && !roomToheck.isWall()) {
 					roomToheck.setPath(true);
 					currentRow = nextRow;
 					currentColumn = nextColumn;
@@ -123,7 +123,7 @@ public class Maze {
 			
 			if(nextColumn <= dimention || nextRow <= dimention) {
 				Room roomToheck = getRoom(nextRow, nextColumn);
-				if(!roomToheck.isEntrance && !roomToheck.isWall) {
+				if(!roomToheck.isEntrance() && !roomToheck.isWall()) {
 					roomToheck.setPath(true);
 					roomToheck.setInitialPath(true);
 					currentRow = nextRow;
@@ -161,7 +161,7 @@ public class Maze {
 		for(int row = 0; row < dimension; row++) {
 			for(int column = 0; column < dimension; column++) {
 				
-				if(rooms[row][column].isEntrance) {
+				if(rooms[row][column].isEntrance()) {
 					System.out.print("  ");
 				}
 				else if(rooms[row][column].isWall()) {

@@ -2,10 +2,10 @@ package model;
 
 public class Room {
 	
-	boolean isEntrance;
-	boolean isPath;
-	boolean isWall;
-	boolean isInitialPath;
+	private boolean isEntrance;
+	private boolean isPath;
+	private boolean isWall;
+	private boolean isInitialPath;
 	
 	public Room() {
 		isEntrance = false;
