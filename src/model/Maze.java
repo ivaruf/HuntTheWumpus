@@ -15,8 +15,8 @@ public class Maze {
 		setOuterWalls();
 		//generate initial path from entrance...
 		generatePath(dimention*2, true, 1, dimention-2, (dimention-1)/2);
-		for(int i = 0; i < dimention; i++) {
-			generatePath(dimention/4, false, Generator.chooseRandomDirection(),
+		for(int i = 0; i < dimention/2; i++) {
+			generatePath(dimention/2, false, Generator.chooseRandomDirection(),
 						Generator.randomCooridnate(dimention), Generator.randomCooridnate(dimention));
 		}
 	}
@@ -94,10 +94,41 @@ public class Maze {
 			}
 		}
 		if(!hitInitialPath) {
-//			boolean eastBreakout = false;
-//			
-//			while()
-//			breakOutEastAndWest(currentRow, currentColumn);
+			boolean eastBreakout = false;
+			int breakOutEast = currentColumn + 1;
+			
+			while(!eastBreakout) {
+				if(breakOutEast >= dimention || breakOutEast < 0 || currentRow < 0 || currentRow >= dimention) {
+					break;
+				}
+
+				Room east = getRoom(currentRow, breakOutEast) ;
+				if(east.isEntrance() || east.isWall() || east.isInitialPath()) {
+					eastBreakout = true;
+				}
+				else {
+					east.setPath(true);
+					breakOutEast++;
+				}
+			
+			boolean westBreakout = false;
+			int breakOutWest = currentColumn - 1;
+				
+				while(!westBreakout) {
+					if(breakOutWest >= dimention || breakOutWest < 0 || currentRow < 0 || currentRow >= dimention) {
+						break;
+					}
+					
+					Room west = getRoom(currentRow, breakOutWest) ;
+					if(west.isEntrance() || west.isWall() || west.isInitialPath()) {
+						westBreakout = true;
+					}
+					else {
+						west.setPath(true);
+						breakOutWest--;
+					}
+				}
+			}
 		}
 	}
 
