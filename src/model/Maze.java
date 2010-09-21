@@ -94,41 +94,58 @@ public class Maze {
 			}
 		}
 		if(!hitInitialPath) {
-			boolean eastBreakout = false;
-			int breakOutEast = currentColumn + 1;
 			
-			while(!eastBreakout) {
-				if(breakOutEast >= dimention || breakOutEast < 0 || currentRow < 0 || currentRow >= dimention) {
-					break;
-				}
+			if(currentColumn > dimention/2) {
+				breakOut(4, currentRow, currentColumn, true);
+			}
+			else {
+				breakOut(2, currentRow, currentColumn, true);
+			}
+		}
+	}
+	
 
-				Room east = getRoom(currentRow, breakOutEast) ;
-				if(east.isEntrance() || east.isWall() || east.isInitialPath()) {
-					eastBreakout = true;
+	private void breakOut(int direction, int currentRow, int currentColumn, boolean retry) {
+		boolean breakOut = false;
+		boolean hitInitialPath = false;
+		int breakOutColumn = 0;
+		
+		if(direction == 2) {
+			breakOutColumn = currentColumn+1;
+		}
+		if(direction == 4) {
+			breakOutColumn = currentColumn-1;
+		}
+		while(!breakOut) {
+			if(breakOutColumn >= dimention || breakOutColumn < 0 || currentRow < 0 || currentRow >= dimention) {
+				break;
+			}
+
+			Room next = getRoom(currentRow, breakOutColumn) ;
+			if( next.isWall()) {
+				breakOut = true;
+				break;
+			}
+			else if(next.isEntrance() || next.isInitialPath()){
+				hitInitialPath = true;
+				break;
+			}
+			else {
+				next.setPath(true);
+				if(direction == 2) {
+					breakOutColumn++;
 				}
-				else {
-					east.setPath(true);
-					breakOutEast++;
-				}
-			
-			boolean westBreakout = false;
-			int breakOutWest = currentColumn - 1;
-				
-				while(!westBreakout) {
-					if(breakOutWest >= dimention || breakOutWest < 0 || currentRow < 0 || currentRow >= dimention) {
-						break;
-					}
-					
-					Room west = getRoom(currentRow, breakOutWest) ;
-					if(west.isEntrance() || west.isWall() || west.isInitialPath()) {
-						westBreakout = true;
-					}
-					else {
-						west.setPath(true);
-						breakOutWest--;
-					}
+				if(direction == 4) {
+					breakOutColumn--;
 				}
 			}
+		}
+		//recusion might hit infinite loop ---
+		if(!hitInitialPath && direction == 2 && retry) {
+			breakOut(4, currentRow, breakOutColumn, false);
+		}
+		if(!hitInitialPath && direction == 4 && retry) {
+			breakOut(2, currentRow, breakOutColumn, false);
 		}
 	}
 
