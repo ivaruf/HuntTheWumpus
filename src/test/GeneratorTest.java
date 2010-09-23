@@ -10,9 +10,9 @@ public class GeneratorTest {
 
 	@Test
 	public void chooseRandomDirectionTest() throws Exception {
-		int direction = Generator.chooseRandomDirection();
+		String direction = Generator.chooseRandomDirection();
 		boolean success = false;
-		if(direction == 1 || direction == 2 || direction == 3 || direction == 4) {
+		if(direction.equals("N")|| direction.equals("E") || direction.equals("S") || direction.equals("W")) {
 			success = true;
 		}
 		assertTrue(success);

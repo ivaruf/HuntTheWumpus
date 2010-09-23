@@ -14,7 +14,7 @@ public class Maze {
 		setEntrance();
 		setOuterWalls();
 		// generate initial path from entrance...
-		generatePath(dimention * 3, 1, dimention - 2, (dimention - 1) / 2);
+		generatePath(dimention * 3, "N", dimention - 2, (dimention - 1) / 2);
 		for (int numberOfForks = 0; numberOfForks < dimention / 2; numberOfForks++) {
 			generateFork();
 		}
@@ -25,7 +25,7 @@ public class Maze {
 		while (!newPath) {
 			int row = Generator.randomCooridnate(dimention);
 			int column = Generator.randomCooridnate(dimention);
-			int direction = Generator.chooseRandomDirection();
+			String direction = Generator.chooseRandomDirection();
 			if (getRoom(row, column).isPath()) {
 				generatePath(dimention * 3, direction, row, column);
 				newPath = true;
@@ -61,13 +61,13 @@ public class Maze {
 		}
 	}
 
-	private void generatePath(int steps, int directionTendency, int startRow,
+	private void generatePath(int steps, String directionTendency, int startRow,
 			int startColumn) {
 		int currentRow = startRow;
 		int currentColumn = startColumn;
 
 		boolean tendency = true;
-		int direction;
+		String direction;
 
 		for (int i = 0; i < steps; i++) {
 			if (tendency) {
@@ -78,19 +78,19 @@ public class Maze {
 				direction = Generator.chooseRandomDirection();
 			}
 			// go north, -1 row
-			if (direction == 1) {
+			if (direction.equals("N")) {
 				currentRow = currentRow - 1;
 			}
 			// go east, +1 column
-			else if (direction == 2) {
+			else if (direction.equals("E")) {
 				currentColumn = currentColumn + 1;
 			}
 			// go south, row +1;
-			else if (direction == 3) {
+			else if (direction.equals("S")) {
 				currentRow = currentRow + 1;
 			}
 			// go west, -1 column
-			else if (direction == 4) {
+			else if (direction.equals("W")) {
 				currentColumn = currentColumn - 1;
 			}
 
