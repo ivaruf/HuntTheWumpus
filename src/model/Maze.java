@@ -1,7 +1,5 @@
 package model;
 
-import java.awt.geom.GeneralPath;
-
 import program.Generator;
 
 public class Maze {
