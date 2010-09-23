@@ -25,9 +25,9 @@ public class Maze {
 		while (!newPath) {
 			int row = Generator.randomCooridnate(dimension);
 			int column = Generator.randomCooridnate(dimension);
-			String direction = Generator.chooseRandomDirection();
 			if (getRoom(row, column).isPath()) {
-				generatePath(dimension * 3, direction, row, column);
+				String direction = Generator.chooseRandomDirection();
+				generatePath(dimension, direction, row, column);
 				newPath = true;
 			}
 		}
