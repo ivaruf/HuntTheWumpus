@@ -19,12 +19,20 @@ public class MazeTest {
 		Maze maze = new Maze(5);
 		Room entrance = maze.getRoom(4, 2);
 		assertTrue(entrance.isEntrance());
+		
 		maze = new Maze(6);
 		entrance = maze.getRoom(5, 2);
 		assertTrue(entrance.isEntrance());
+		
 		maze = new Maze(7);
 		entrance = maze.getRoom(6, 3);
 		assertTrue(entrance.isEntrance());
+
+		maze = new Maze(10);		
+		assertTrue(maze.getRoom(9, 4).isEntrance());
+		
+		maze = new Maze(25);		
+		assertTrue(maze.getRoom(24, 12).isEntrance());
 	}
 	
 	@Test
@@ -58,15 +66,5 @@ public class MazeTest {
 				}
 			}
 		}
-	}
-	
-	@Test
-	public void entranceIsAtCorrectLocation() throws Exception {
-		Maze maze = new Maze(5);		
-		assertTrue(maze.getRoom(4, 2).isEntrance());
-		maze = new Maze(10);		
-		assertTrue(maze.getRoom(9, 4).isEntrance());
-		maze = new Maze(25);		
-		assertTrue(maze.getRoom(24, 12).isEntrance());
 	}
 }
