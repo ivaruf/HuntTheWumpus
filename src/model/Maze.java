@@ -5,17 +5,17 @@ import program.Generator;
 public class Maze {
 
 	private Room[][] rooms;
-	private int dimention;
+	private int dimension;
 
-	public Maze(int dimention) {
-		rooms = new Room[dimention][dimention];
-		this.dimention = dimention;
+	public Maze(int dimension) {
+		rooms = new Room[dimension][dimension];
+		this.dimension = dimension;
 		initRooms();
 		setEntrance();
 		setOuterWalls();
 		// generate initial path from entrance...
-		generatePath(dimention * 3, "N", dimention - 2, (dimention - 1) / 2);
-		for (int numberOfForks = 0; numberOfForks < dimention / 2; numberOfForks++) {
+		generatePath(dimension * 3, "N", dimension - 2, (dimension - 1) / 2);
+		for (int numberOfForks = 0; numberOfForks < dimension / 2; numberOfForks++) {
 			generateFork();
 		}
 	}
@@ -23,21 +23,21 @@ public class Maze {
 	private void generateFork() {
 		boolean newPath = false;
 		while (!newPath) {
-			int row = Generator.randomCooridnate(dimention);
-			int column = Generator.randomCooridnate(dimention);
+			int row = Generator.randomCooridnate(dimension);
+			int column = Generator.randomCooridnate(dimension);
 			String direction = Generator.chooseRandomDirection();
 			if (getRoom(row, column).isPath()) {
-				generatePath(dimention * 3, direction, row, column);
+				generatePath(dimension * 3, direction, row, column);
 				newPath = true;
 			}
 		}
 	}
 
 	private void setOuterWalls() {
-		for (int row = 0; row < dimention; row++) {
-			for (int column = 0; column < dimention; column++) {
-				if (row == 0 || row == dimention - 1 || column == 0
-						|| column == dimention - 1) {
+		for (int row = 0; row < dimension; row++) {
+			for (int column = 0; column < dimension; column++) {
+				if (row == 0 || row == dimension - 1 || column == 0
+						|| column == dimension - 1) {
 					rooms[row][column].setWall(true);
 				}
 			}
@@ -47,15 +47,15 @@ public class Maze {
 	private void setEntrance() {
 		// entrance is set to the room that is to the far south, and in the
 		// middle
-		rooms[dimention - 1][(dimention - 1) / 2].setEntrance(true);
-		rooms[dimention - 1][(dimention - 1) / 2].setPath(true);
+		rooms[dimension - 1][(dimension - 1) / 2].setEntrance(true);
+		rooms[dimension - 1][(dimension - 1) / 2].setPath(true);
 		// room directly north of entrance is set to path
-		rooms[dimention - 2][(dimention - 1) / 2].setPath(true);
+		rooms[dimension - 2][(dimension - 1) / 2].setPath(true);
 	}
 
 	private void initRooms() {
-		for (int row = 0; row < dimention; row++) {
-			for (int column = 0; column < dimention; column++) {
+		for (int row = 0; row < dimension; row++) {
+			for (int column = 0; column < dimension; column++) {
 				rooms[row][column] = new Room();
 			}
 		}

@@ -18,9 +18,9 @@ public class Generator {
 		else return "error";
 	}
 
-	static public int randomCooridnate(int dimention) {
+	static public int randomCooridnate(int dimension) {
 		Random random = new Random();
-		return random.nextInt(dimention-2)+1;
+		return random.nextInt(dimension-2)+1;
 	}
 
 }
