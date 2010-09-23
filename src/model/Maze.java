@@ -30,6 +30,7 @@ public class Maze {
 			int column = Generator.randomCooridnate(dimention);
 			int direction = Generator.chooseRandomDirection();
 			if(getRoom(row, column).isPath()) {
+				System.out.println("row: " + row + " column " + column);
 				generatePath(dimention*3, direction, row, column);
 				newPath = true;
 			}
@@ -49,13 +50,14 @@ public class Maze {
 	private void setEntrance() {
 		//entrance is set to the room that is to the far south, and in the middle
 		rooms[dimention-1][(dimention-1)/2].setEntrance(true);
+		rooms[dimention-1][(dimention-1)/2].setPath(true);
 		//room directly north of entrance is set to path
 		rooms[dimention-2][(dimention-1)/2].setPath(true);
 	}
 
 	private void initRooms() {
-		for (int row = 0; row < rooms.length; row++) {
-			for (int column = 0; column < rooms[row].length; column++) {
+		for (int row = 0; row < dimention; row++) {
+			for (int column = 0; column < dimention; column++) {
 				rooms[row][column] = new Room();
 			}
 		}
@@ -93,12 +95,13 @@ public class Maze {
 			else if(direction == 4){
 				currentColumn = currentColumn-1;
 			}
-			
-			if(currentColumn < dimention && currentRow < dimention && currentRow > 0 && currentColumn > 0) {
-				Room roomToheck = getRoom(currentRow, currentColumn);
-				if(!roomToheck.isEntrance() && !roomToheck.isWall()) {
-					roomToheck.setPath(true);
-				}
+
+			Room roomToheck = getRoom(currentRow, currentColumn);
+			if(roomToheck.isWall()) {
+				break;
+			}
+			else {
+				roomToheck.setPath(true);
 			}
 		}
 	}
