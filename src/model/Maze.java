@@ -6,15 +6,19 @@ public class Maze {
 
 	private Room[][] rooms;
 	private int dimension;
+	private int entranceRow;
+	private int entranceColumn;
 
 	public Maze(int dimension) {
 		rooms = new Room[dimension][dimension];
 		this.dimension = dimension;
+		entranceRow = dimension -1;
+		entranceColumn = (dimension - 1) / 2;
 		initRooms();
 		setEntrance();
 		setOuterWalls();
 		// generate initial path from entrance...
-		generatePath(dimension * 3, "N", dimension - 2, (dimension - 1) / 2);
+		generatePath(dimension * 3, "N", entranceRow, entranceColumn);
 		for (int numberOfForks = 0; numberOfForks < dimension / 2; numberOfForks++) {
 			generateFork();
 		}
@@ -47,10 +51,9 @@ public class Maze {
 	private void setEntrance() {
 		// entrance is set to the room that is to the far south, and in the
 		// middle
-		rooms[dimension - 1][(dimension - 1) / 2].setEntrance(true);
-		rooms[dimension - 1][(dimension - 1) / 2].setPath(true);
-		// room directly north of entrance is set to path
-		rooms[dimension - 2][(dimension - 1) / 2].setPath(true);
+		Room entrance = getRoom(entranceRow, entranceColumn);
+		entrance.setEntrance(true);
+		entrance.setPath(true);
 	}
 
 	private void initRooms() {
@@ -135,5 +138,30 @@ public class Maze {
 			}
 		}
 		return numberOfRooms;
+	}
+
+	public Room getEntrance() {
+		return getRoom(entranceRow, entranceColumn);
+	}
+
+	public int getEntranceRow() {
+		return entranceRow;
+	}
+
+	public int getEntranceColumn() {
+		return entranceColumn;
+	}
+
+	public int[] getRowAndColumn(Room position) {
+		int[] coordinates = new int[2];
+		for(int row = 0 ; row < dimension; row ++) {
+			for(int column = 0; column < dimension; column++) {
+				if(position == getRoom(row, column)) {
+					coordinates[0] = row;
+					coordinates[1] = column;
+				}
+			}
+		}
+		return coordinates;
 	}
 }
