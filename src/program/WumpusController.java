@@ -1,5 +1,7 @@
 package program;
 
+import java.util.Scanner;
+
 import model.Maze;
 import model.Player;
 
@@ -7,19 +9,59 @@ public class WumpusController {
 	
 	private Player player;
 	private Maze maze;
+	private Scanner keyboard;
 	
 
 	public static void main(String[] args) {
 		WumpusController wumpusController = new WumpusController(40);
+		wumpusController.runGame();
 	}
-	
+
 	public WumpusController(int size) {
 		maze = new Maze(size);
 		player = new Player();
-		player.setPosition(maze.getEntrance());
-		
-		//maze.printMaze();
+		player.setPosition(maze.getEntrance());		
 	}
+	
+	private void runGame() {
+		
+		printGreeting();
+		System.out.println("You can: ");
+		System.out.println("Go North (N)");
+		System.out.println("'Cheat' and print the maze (P)");
+		
+		boolean gameOver = false;
+		keyboard = new Scanner(System.in);
+		
+		while(!gameOver) {
+			commandLoop();
+		}
+	}
+
+	private void commandLoop() {
+		
+		String command = keyboard.next();
+		
+		if(command.equals("N")) {
+			movePlayer("N");
+		}
+		else if(command.equals("P")) {
+			maze.printMaze(player.getPosition());
+		}
+		else {
+			System.out.println("I don't know what you mean by " + command);
+		}
+				
+	}
+
+	private void printGreeting() {
+		System.out.println("********************************************");		
+		System.out.println("You are standing  at the entrance of a cave.");		
+		System.out.println("Inside is the legenday Wumpus! You have been");		
+		System.out.println("tasked to kill it, good luck!");
+		System.out.println("********************************************");		
+	}
+
 	
 	public void movePlayer(String direction) {
 		int[] coordinates = maze.getRowAndColumn(player.getPosition());
@@ -30,7 +72,6 @@ public class WumpusController {
 		}
 		
 	}
-
 	/*
 	 * Getters and setters, used in tests.
 	 */

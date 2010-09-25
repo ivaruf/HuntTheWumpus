@@ -110,12 +110,14 @@ public class Maze {
 		return rooms[row][column];
 	}
 
-	public void printMaze() {
+	public void printMaze(Room playerPosition) {
 		int dimension = rooms.length;
 
 		for (int row = 0; row < dimension; row++) {
 			for (int column = 0; column < dimension; column++) {
-
+				if(rooms[row][column] == playerPosition) {
+					System.out.print("@ ");
+				}
 				if (rooms[row][column].isEntrance()) {
 					System.out.print("  ");
 				} else if (rooms[row][column].isWall()) {
