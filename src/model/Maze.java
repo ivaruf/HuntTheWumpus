@@ -118,13 +118,16 @@ public class Maze {
 				if(rooms[row][column] == playerPosition) {
 					System.out.print("@ ");
 				}
-				if (rooms[row][column].isEntrance()) {
+				else if (rooms[row][column].isEntrance()) {
 					System.out.print("  ");
-				} else if (rooms[row][column].isWall()) {
+				} 
+				else if (rooms[row][column].isWall()) {
 					System.out.print("# ");
-				} else if (rooms[row][column].isPath()) {
+				}
+				else if (rooms[row][column].isPath()) {
 					System.out.print("  ");
-				} else {
+				}
+				else {
 					System.out.print("x ");
 				}
 			}

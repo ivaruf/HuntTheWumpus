@@ -20,7 +20,8 @@ public class WumpusController {
 	public WumpusController(int size) {
 		maze = new Maze(size);
 		player = new Player();
-		player.setPosition(maze.getEntrance());		
+		player.setPosition(maze.getEntrance());
+		
 	}
 	
 	private void runGame() {
@@ -29,29 +30,37 @@ public class WumpusController {
 		System.out.println("You can: ");
 		System.out.println("Go North (N)");
 		System.out.println("'Cheat' and print the maze (P)");
+		System.out.println("Quit the game (Q)");
 		
 		boolean gameOver = false;
 		keyboard = new Scanner(System.in);
 		
 		while(!gameOver) {
-			commandLoop();
+			System.out.println();
+			System.out.print("What will you do next: ");
+			String command = keyboard.next();
+			
+			if(command.equals("N")) {
+				movePlayer("N");
+			}
+			else if(command.equals("P")) {
+				System.out.println();
+				maze.printMaze(player.getPosition());
+			}
+			else if(command.equals("Q")) {
+				System.out.print("Are you sure you want to quit? Y/N: ");
+				String confirm = keyboard.next();
+				if(confirm.equals("Y")) {
+					gameOver = true;
+				}
+			}
+			else {
+				System.out.println("I don't know what you mean by " + command);
+			}
+			System.out.println();
 		}
-	}
-
-	private void commandLoop() {
 		
-		String command = keyboard.next();
-		
-		if(command.equals("N")) {
-			movePlayer("N");
-		}
-		else if(command.equals("P")) {
-			maze.printMaze(player.getPosition());
-		}
-		else {
-			System.out.println("I don't know what you mean by " + command);
-		}
-				
+		System.out.println("Thanks for playing!");
 	}
 
 	private void printGreeting() {
