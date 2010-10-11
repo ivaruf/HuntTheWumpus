@@ -77,7 +77,12 @@ public class WumpusController {
 		int row = coordinates[0];
 		int column = coordinates[1];
 		if(direction == "N"){
-			player.setPosition(maze.getRoom(row-1, column));
+			if(maze.getRoom(row-1, column).isPath()){
+				player.setPosition(maze.getRoom(row-1, column));
+			}
+			else{
+				System.out.println("The path north is blocked!");
+			}
 		}
 		
 	}
