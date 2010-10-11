@@ -29,6 +29,9 @@ public class WumpusController {
 		printGreeting();
 		System.out.println("You can: ");
 		System.out.println("Go North (N)");
+		System.out.println("Go East (E)");
+		System.out.println("Go South (S)");
+		System.out.println("Go West (W)");
 		System.out.println("'Cheat' and print the maze (P)");
 		System.out.println("Quit the game (Q)");
 		
@@ -46,7 +49,7 @@ public class WumpusController {
 			else if(command.equals("E")) {
 				movePlayer("E");
 			}
-			else if(command.equals("S")) {
+			else if(command.equals("S")) {				
 				movePlayer("S");
 			}
 			else if(command.equals("W")) {
@@ -104,11 +107,16 @@ public class WumpusController {
 			
 		}
 		else if(direction.equals("S")) {
-			if(maze.getRoom(row+1, column).isPath()){
-				player.setPosition(maze.getRoom(row+1, column));
+			if(player.getPosition() == maze.getEntrance()) {
+				System.out.println("You can't exit the cave before you slay the wumpus or die!");
 			}
 			else{
-				System.out.println("The path south is blocked!");
+				if(maze.getRoom(row+1, column).isPath()){
+					player.setPosition(maze.getRoom(row+1, column));
+				}
+				else{
+					System.out.println("The path south is blocked!");
+				}
 			}
 			
 		}
