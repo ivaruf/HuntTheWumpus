@@ -43,6 +43,15 @@ public class WumpusController {
 			if(command.equals("N")) {
 				movePlayer("N");
 			}
+			else if(command.equals("E")) {
+				movePlayer("E");
+			}
+			else if(command.equals("S")) {
+				movePlayer("S");
+			}
+			else if(command.equals("W")) {
+				movePlayer("W");
+			}
 			else if(command.equals("P")) {
 				System.out.println();
 				maze.printMaze(player.getPosition());
@@ -58,6 +67,7 @@ public class WumpusController {
 				System.out.println("I don't know what you mean by " + command);
 			}
 			System.out.println();
+			maze.printMaze(player.getPosition());
 		}
 		
 		System.out.println("Thanks for playing!");
@@ -76,13 +86,40 @@ public class WumpusController {
 		int[] coordinates = maze.getRowAndColumn(player.getPosition());
 		int row = coordinates[0];
 		int column = coordinates[1];
-		if(direction == "N"){
+		if(direction.equals("N")){
 			if(maze.getRoom(row-1, column).isPath()){
 				player.setPosition(maze.getRoom(row-1, column));
 			}
 			else{
 				System.out.println("The path north is blocked!");
 			}
+		}
+		else if(direction.equals("E")) {
+			if(maze.getRoom(row, column+1).isPath()){
+				player.setPosition(maze.getRoom(row, column+1));
+			}
+			else{
+				System.out.println("The path east is blocked!");
+			}
+			
+		}
+		else if(direction.equals("S")) {
+			if(maze.getRoom(row+1, column).isPath()){
+				player.setPosition(maze.getRoom(row+1, column));
+			}
+			else{
+				System.out.println("The path south is blocked!");
+			}
+			
+		}
+		else if(direction.equals("W")) {
+			if(maze.getRoom(row, column-1).isPath()){
+				player.setPosition(maze.getRoom(row, column-1));
+			}
+			else{
+				System.out.println("The path west is blocked!");
+			}
+			
 		}
 		
 	}
